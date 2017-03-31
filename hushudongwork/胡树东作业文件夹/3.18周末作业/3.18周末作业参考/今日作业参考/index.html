@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>作业参考</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+   <script type="text/javascript">
+         /**
+          * 用户名匹配 用户名  支持中文、字母、数字、“-”“_”的组合，4-20个字符
+          */
+         var regUser = /^[\w\u4e00-\u9fa5-_]{4,20}$/;
+         /**
+          * 建议使用字母、数字和符号两种及以上的组合，6-20个字符'
+          */
+         var regPassword = /^.{6,20}$/;
+         /**
+          * 电话正则
+          */
+         var  regTel = /^1[3458]\d{9}$/;
+         /**
+          * 邮箱正则
+          */
+         var regEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+         //开启程序  
+         Home();
+        /**
+         程序入口
+         */
+         function Home(){
+           
+         var key =  prompt("简约登录系统\n1.登录\n2.注册\n3.退出");
+
+            switch(key){
+                  case '1':
+                    login();
+                  break;
+                  case '2':
+                    register();
+                  break;
+                  case '3':
+                  return;
+                  default:
+            }
+
+            Home();
+         }
+
+          /**
+           * [register 注册]
+           * @return {[type]} [description]
+           */
+         function register(){
+               // userName 键盘接收用户名
+              var userName = getValue(regUser,"请输入用户名！","格式有误!请重新输入用户名！");
+              //userPassWord 键盘接收用户名
+              var userPassWord = getValue(regPassword,"请输入密码！","格式有误!请重新输入密码！");
+              //确认密码
+              suerPassWord(userPassWord,"请输入密码！","两次密码不一致,请重新输入！");
+              //userTel
+              var userTel = getValue(regTel,"请输入电话号码！","您输入的不是电话号码,请重新输入！");
+              //键盘输入邮箱验证
+              var userEmail = getValue(regEmail,"请输入邮箱账号！","格式有误!请重新输入邮箱账号！");
+              alert("注册成功！"); 
+         }
+
+         /**
+          * 获取密码
+          */
+         function suerPassWord(PassWord,value1,value2){
+
+             //键盘接受值
+             var str = prompt(value1);
+                if (str==PassWord) {
+                    return;
+                } 
+              //不匹配措施
+               value1=value2;
+             //不匹配继续执行
+               suerPassWord(PassWord,value1,value2); 
+         }
+
+         /**
+          * [getUserName 获取用户名]
+          * @return {[type]} [description]
+          */
+         function getValue(reg,value1,value2){
+         	//键盘接受值
+             var str = prompt(value1);
+                if (reg.test(str)) {
+                    return str;
+                }
+                //不匹配措施
+                value1 = value2;
+                //不匹配继续执行	
+                getValue(reg,value1,value2);
+         }
+ 
+   </script>
+
+</body>
+</html>
